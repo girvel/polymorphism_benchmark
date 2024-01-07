@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
-#include <chrono>
 #include <ranges>
+#include "time_point.cpp"
 
 class BaseClass {
 public:
@@ -20,6 +20,8 @@ public:
 int main(int argc, char *argv[]) {
     int operations_n = std::stoi(argv[1]);
 
+    TimePoint timer;
+
     std::vector<std::unique_ptr<BaseClass>> raisers;
     raisers.reserve(operations_n);
 
@@ -31,17 +33,19 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    int initialization_time_ms = timer.ms_elapsed();
+    timer.reset();
 
     long result = 0;
     for (const auto &current_raiser : raisers) {
         result = current_raiser->raise(result);
     }
 
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    int execution_time_ms = timer.ms_elapsed();
 
-    std::cout << "Took " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " ms\n";
-    std::cout << "Result is " << result << std::endl;
+    std::cout << "Initialization time = " << initialization_time_ms << " ms\n";
+    std::cout << "Execution time      = " << execution_time_ms << " ms\n";
+    std::cout << "Result              = " << result << std::endl;
 
     return 0;
 }

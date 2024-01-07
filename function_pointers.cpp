@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
-#include <chrono>
 #include <ranges>
+#include "time_point.cpp"
 
 
 long raise_by_one(long number) {
@@ -16,6 +16,8 @@ long raise_by_two(long number) {
 int main(int argc, char *argv[]) {
     int operations_n = std::stoi(argv[1]);
 
+    TimePoint timer;
+
     using RaiserFunction = long(long);
 
     std::vector<RaiserFunction *> raisers;
@@ -25,17 +27,19 @@ int main(int argc, char *argv[]) {
         raisers.push_back(i % 10 == 0 ? raise_by_two : raise_by_one);
     }
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    int initialization_time_ms = timer.ms_elapsed();
+    timer.reset();
 
     long result = 0;
     for (const auto &current_raiser : raisers) {
         result = current_raiser(result);
     }
 
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    int execution_time_ms = timer.ms_elapsed();
 
-    std::cout << "Took " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " ms\n";
-    std::cout << "Result is " << result << std::endl;
+    std::cout << "Initialization time = " << initialization_time_ms << " ms\n";
+    std::cout << "Execution time      = " << execution_time_ms << " ms\n";
+    std::cout << "Result              = " << result << std::endl;
 
     return 0;
 }
