@@ -1,9 +1,9 @@
 #include <chrono>
 
 // std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-class TimePoint {
+class Timer {
 public:
-    TimePoint() : _point(std::chrono::steady_clock::now()) {}
+    Timer() : _point(std::chrono::steady_clock::now()) {}
 
     int ms_elapsed() const {
         return std::chrono::duration_cast<std::chrono::milliseconds>(

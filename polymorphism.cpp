@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <ranges>
-#include "time_point.cpp"
+#include "timer.cpp"
 
 class BaseClass {
 public:
@@ -20,7 +20,7 @@ public:
 int main(int argc, char *argv[]) {
     int operations_n = std::stoi(argv[1]);
 
-    TimePoint timer;
+    Timer timer;
 
     std::vector<std::unique_ptr<BaseClass>> raisers;
     raisers.reserve(operations_n);

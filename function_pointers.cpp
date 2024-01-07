@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <ranges>
-#include "time_point.cpp"
+#include "timer.cpp"
 
 
 long raise_by_one(long number) {
@@ -16,7 +16,7 @@ long raise_by_two(long number) {
 int main(int argc, char *argv[]) {
     int operations_n = std::stoi(argv[1]);
 
-    TimePoint timer;
+    Timer timer;
 
     using RaiserFunction = long(long);
 
