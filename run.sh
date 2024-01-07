@@ -6,3 +6,6 @@ g++-13 -std=c++20 polymorphism.cpp -o build/main && ./build/main "$@"
 
 echo -e "\n----- FUNCTION POINTERS -----"
 g++-13 -std=c++20 function_pointers.cpp -o build/main && ./build/main "$@"
+
+echo -e "\n----- FUNCTION POINTERS IN OBJECTS -----"
+g++-13 -std=c++20 function_pointers_in_objects.cpp -o build/main && ./build/main "$@"
