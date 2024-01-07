@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
 mkdir -p build
-g++-13 -std=c++20 "$1" -o build/main && ./build/main "$2"
+echo -e "\n----- POLYMORPHISM -----"
+g++-13 -std=c++20 polymorphism.cpp -o build/main && ./build/main "$@"
+
+echo -e "\n----- FUNCTION POINTERS -----"
+g++-13 -std=c++20 function_pointers.cpp -o build/main && ./build/main "$@"
